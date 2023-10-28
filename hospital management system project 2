@@ -1,0 +1,83 @@
+status_options = ['Normal','Urgent','Super Urgent']
+patients_Data = {}
+spec_Data = {'1':[], '2':[], '3':[], '4':[], '5':[], '6':[], '7':[], '8':[], '9':[], '10':[],
+            '11':[], '12':[], '13':[], '14':[], '15':[], '16':[], '17':[], '18':[], '19':[], '20':[]}
+choice = 0
+    
+while choice != 5:
+    print("------------Program Options------------")
+    print("---------------------------------------")
+    print("| 𝑻𝒐 𝒂𝒅𝒅 𝒏𝒆𝒘 𝒑𝒂𝒕𝒊𝒆𝒏𝒕 --- Enter 1 |")
+    print("| 𝑻𝒐 𝒑𝒓𝒊𝒏𝒕 𝒂𝒍𝒍 𝒑𝒂𝒕𝒊𝒆𝒏𝒕𝒔 --- Enter 2 |")
+    print("| 𝑻𝒐 𝒈𝒆𝒕 𝒏𝒆𝒙𝒕 𝒑𝒂𝒕𝒊𝒆𝒏𝒕 --- Enter 3 |")
+    print("| 𝑻𝒐 𝒓𝒆𝒎𝒐𝒗𝒆 𝒂 𝒍𝒆𝒂𝒗𝒊𝒏𝒈 𝒑𝒂𝒕𝒊𝒆𝒏𝒕 --- Enter 4 |")
+    print("| 𝑻𝒐 𝒆𝒏𝒅 𝒕𝒉𝒆 𝒑𝒓𝒐𝒈𝒓𝒂𝒎 --- Enter 5 |")
+    print("---------------------------------------")
+    choice = int(input("ᴇɴᴛᴇʀ ʏᴏᴜʀ ᴄʜᴏɪᴄᴇ (ғʀᴏᴍ 𝟷 ᴛᴏ 𝟻): "))
+    
+    if choice == 1:
+        spec = int(input('''
+                        ----------------------------------
+                        𝗘𝗻𝘁𝗲𝗿 𝘀𝗽𝗲𝗰𝗶𝗮𝗹𝗶𝘇𝗮𝘁𝗶𝗼𝗻(𝟭-𝟮𝟬):
+                        ----------------------------------
+                             1. specilization1 
+                             2. specilization2 
+                             3. specilization3
+                             4. specilization4
+                             5. specilization5
+                             6. specilization6
+                             7. specilization7
+                             8. specilization8
+                             9. specilization9
+                             10.specilization10
+                             11. specilization11
+                             12. specilization12
+                             13.specilization13
+                             14. specilization14
+                             15.specilization15
+                             16.specilization16
+                             17. specilization17
+                             18. specilization18
+                             19. specilization19
+                             20. specilization20 
+                         '''))
+        if 1<= spec <=20:
+            p_id = int(input("𝐄𝐧𝐭𝐞𝐫 𝐏𝐚𝐭𝐢𝐞𝐧𝐭'𝐬 𝐈𝐃: "))
+            while p_id in patients_Data:
+                p_id = input(" ❌ 🅴🆁🆁🅾🆁 ❌ Patient ID already exist! Enter new ID: ")
+            p_name = input("𝗘𝗻𝘁𝗲𝗿 𝗽𝗮𝘁𝗶𝗲𝗻𝘁'𝘀 𝗻𝗮𝗺𝗲: ")
+            p_status = int(input('''  
+                ----------------------------------
+                |      𝐄𝐧𝐭𝐞𝐫 𝐩𝐚𝐭𝐢𝐞𝐧𝐭'𝐬 𝐬𝐭𝐚𝐭𝐮𝐬:     |
+                ----------------------------------
+                |       0 : 𝘯𝘰𝘳𝘮𝘢𝘭               |
+                |       1 : 𝘶𝘳𝘨𝘦𝘯𝘵               |
+                |       2 : 𝘴𝘶𝘱𝘦𝘳 𝘶𝘳𝘨𝘦𝘯𝘵          |
+                ----------------------------------
+            '''))
+            patients_Data[p_id]=[spec,p_name,status_options[p_status]]
+            spec_Data[str(spec)].append(p_name)
+        else:
+            print("     ❌ 🅴🆁🆁🅾🆁 ❌  Specialization is not valid!!!.....Please enter a valid specialization")
+    elif choice == 2:
+        for key, value in spec_Data.items():
+            print(f'Specialization {key}, has {len(value)} patients')
+            for i in range(0,len(value)):
+                for p_id in patients_Data:
+                    if spec_Data[key][i] == patients_Data[p_id][1]:
+                        print(f'Patient: {spec_Data[key][i]} in Specialization: {patients_Data[p_id][0]} is {patients_Data[p_id][2]}')
+            print()
+
+    elif choice == 3:
+        curr_spec = int(input("𝗘𝗻𝘁𝗲𝗿 𝘀𝗽𝗲𝗰𝗶𝗮𝗹𝗶𝘇𝗮𝘁𝗶𝗼𝗻: "))
+        if spec_Data[str(curr_spec)]:
+            print(f'{spec_Data[str(curr_spec)][0]}, Please go to the doc!')
+            del spec_Data[str(curr_spec)][0]
+        else:
+            print('Currently there are no patients')
+    
+    elif choice == 4:
+        p_id = int(input("𝐄𝐧𝐭𝐞𝐫 𝐏𝐚𝐭𝐢𝐞𝐧𝐭'𝐬 𝐈𝐃: "))
+        if p_id in patients_Data:
+            patients_Data.pop(p_id)
+            print("Patients data deleted successfully !!")
